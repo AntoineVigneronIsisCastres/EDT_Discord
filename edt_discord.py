@@ -28,9 +28,9 @@ def get_page(url):
     print(lundimatieres)
     lundi = []
     for matiere in lundimatieres:
-        matiereparse = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
-        print(matiereparse.text)
-        lundi.append(matiereparse.text)
+        matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+        print(matiereparse)
+        lundi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 101px;']"
     mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
@@ -38,9 +38,9 @@ def get_page(url):
     print(mardimatieres)
     mardi = []
     for matiere in mardimatieres:
-        matiereparse = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
-        print(matiereparse.text)
-        mardi.append(matiereparse.text)
+        matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+        print(matiereparse)
+        mardi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 202px;']"
     mercredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
@@ -48,9 +48,9 @@ def get_page(url):
     print(mercredimatieres)
     mercredi = []
     for matiere in mercredimatieres:
-        matiereparse = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
-        print(matiereparse.text)
-        mercredi.append(matiereparse.text)
+        matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+        print(matiereparse)
+        mercredi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 303px;']"
     jeudimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
@@ -58,9 +58,9 @@ def get_page(url):
     print(jeudimatieres)
     jeudi = []
     for matiere in jeudimatieres:
-        matiereparse = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
-        print(matiereparse.text)
-        jeudi.append(matiereparse.text)
+        matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+        print(matiereparse)
+        jeudi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 404px;']"
     vendredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
@@ -68,9 +68,9 @@ def get_page(url):
     print(vendredimatieres)
     vendredi = []
     for matiere in vendredimatieres:
-        matiereparse = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
-        print(matiereparse.text)
-        vendredi.append(matiereparse.text)
+        matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+        print(matiereparse)
+        vendredi.append(matiereparse)
 
     semaine = [lundi,mardi,mercredi,jeudi,vendredi]
     print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -110,18 +110,23 @@ def sendWebhook(embed_Cours):
     embed = DiscordEmbed(title='__***' + "EdT Scrapper" + '***__',
                          url=url,
                          #  description='[Item](' + url + ')',
-                         color=0x2f3136)
+                         color=4894178)
 
     embed.set_thumbnail(url="https://media.discordapp.net/attachments/931482193170157589/931492488332603402/logo.png?width=779&height=670")
     for date in embed_Cours:
         print("ayooooooo")
         print(embed_Cours)
         print(date)
-        embed.add_embed_field(name=':straight_ruler: '+str(date),
-                              value="```" + str(embed_Cours[date]) + "``` ",
-                              inline=True)
+        coursjournee = ""
+        for cours in embed_Cours[date]:
+            print(str(cours))
+            coursjournee = str(cours)
+            embed.add_embed_field(name=':straight_ruler: '+date,
+                                  value="```\n" + coursjournee + "``` ",
+                                  inline=True)
+        #embed.add_embed_field(name='\u200b', value='\u200b')
 
-    embed.set_footer(text="ISIS",
+    embed.set_footer(text="ISIS Emploi du temps FIA3",
                      icon_url="https://cdn.discordapp.com/attachments/931482193170157589/931486861459869756/ISIS-logo-verti-RVB.png")
 
     embed.set_timestamp()
