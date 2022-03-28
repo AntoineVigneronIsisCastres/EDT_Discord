@@ -24,12 +24,23 @@ def get_page(url):
     edt = {}
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
     lundimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+    hour_css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;'][style*='left: 89px;']"
     print("ça c'est lundi")
     print(lundimatieres)
     lundi = []
     for matiere in lundimatieres:
+        matierehtml = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
+        print(matierehtml)
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         print(matiereparse)
+        matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector)
+        matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+        if matierehour == matiereparse:
+            print("le premier élément de lundimatieres et le css selector = 10h30")
+            print(matierehour)
+            print(matiereparse)
+            print(driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector))
+            matiereparse.append(BeautifulSoup('\n10h30','html.parser'))
         lundi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 101px;']"
@@ -84,23 +95,6 @@ def get_page(url):
     
     print("on fait un test en deuspi")
     print(edt)
-    tab_Cours = []
-    for elt in planning:
-        print("--------------------------------------------------------------")
-        print("EVERY ELEMENT")
-        print("--------------------------------------------------------------")
-        print(elt)
-
-        for e in elt:
-            print("--------------------------------------------------------------")
-            print("EVERY E")
-            print("--------------------------------------------------------------")
-            print(e)
-            if e.findAll(class_="eventText"):
-                print(e.find(class_="eventText").find(class_="eventText"))
-                print("aaa")
-                tab_Cours.append(e.find(class_="eventText").find(class_="eventText").text+"\n")
-                #tab_Cours.append(e.find(class_="eventText").text+"\n")
 
     sendWebhook(edt)
     time.sleep(1000)
@@ -113,19 +107,26 @@ def sendWebhook(embed_Cours):
                          color=4894178)
 
     embed.set_thumbnail(url="https://media.discordapp.net/attachments/931482193170157589/931492488332603402/logo.png?width=779&height=670")
+
     for date in embed_Cours:
+        i = 0
         print("ayooooooo")
         print(embed_Cours)
         print(date)
         coursjournee = ""
+        title = ""
         for cours in embed_Cours[date]:
+            if i == 0:
+                title = ':straight_ruler: '+date
+            else:
+                title = '\u200b'
             print(str(cours))
             coursjournee = str(cours)
-            embed.add_embed_field(name=':straight_ruler: '+date,
+            i += 1
+            embed.add_embed_field(name=title,
                                   value="```\n" + coursjournee + "``` ",
                                   inline=True)
         #embed.add_embed_field(name='\u200b', value='\u200b')
-
     embed.set_footer(text="ISIS Emploi du temps FIA3",
                      icon_url="https://cdn.discordapp.com/attachments/931482193170157589/931486861459869756/ISIS-logo-verti-RVB.png")
 
