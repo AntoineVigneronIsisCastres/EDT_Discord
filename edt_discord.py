@@ -5,6 +5,43 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
+def set_matiere_heure(driver, matiereparse):
+
+    # 8h15
+    hour_css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;'][style*='left: 12px;']"
+    matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector)
+    matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+    if matierehour and matierehour == matiereparse:
+        print("le premier élément de lundimatieres et le css selector = 10h30")
+        print(matierehour)
+        print(matiereparse)
+        print(driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector))
+        matiereparse.append(BeautifulSoup('\n8h15','html.parser'))
+
+    # 10h30
+    hour_css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;'][style*='left: 122px;']"
+    matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector)
+    matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+    if matierehour and matierehour == matiereparse:
+        print("le premier élément de lundimatieres et le css selector = 10h30")
+        print(matierehour)
+        print(matiereparse)
+        print(driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector))
+        matiereparse.append(BeautifulSoup('\n10h30','html.parser'))
+
+    # 13h45
+    hour_css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;'][style*='left: 280px;']"
+    matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector)
+    matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+    if matierehour and matierehour == matiereparse:
+        print("le premier élément de lundimatieres et le css selector = 10h30")
+        print(matierehour)
+        print(matiereparse)
+        print(driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector))
+        matiereparse.append(BeautifulSoup('\n10h30','html.parser'))
+    
+    return matiereparse
+
 
 def get_page(url):
     driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -19,12 +56,13 @@ def get_page(url):
     time.sleep(3)
     data = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[4]").get_attribute('innerHTML')
     planning = BeautifulSoup(data, 'html.parser')
+    print(planning)
     test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
     dates = BeautifulSoup(test,'html.parser').findAll(class_="labelLegend")
     edt = {}
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
     lundimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    hour_css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;'][style*='left: 89px;']"
+
     print("ça c'est lundi")
     print(lundimatieres)
     lundi = []
@@ -33,17 +71,10 @@ def get_page(url):
         print(matierehtml)
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         print(matiereparse)
-        matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector)
-        matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
-        if matierehour == matiereparse:
-            print("le premier élément de lundimatieres et le css selector = 10h30")
-            print(matierehour)
-            print(matiereparse)
-            print(driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector))
-            matiereparse.append(BeautifulSoup('\n10h30','html.parser'))
+        set_matiere_heure(driver, matiereparse)
         lundi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 101px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 91px;']"
     mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
     print("ça c'est mardi")
     print(mardimatieres)
@@ -53,7 +84,7 @@ def get_page(url):
         print(matiereparse)
         mardi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 202px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 182px;']"
     mercredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
     print("ça c'est mercredi")
     print(mercredimatieres)
@@ -63,7 +94,7 @@ def get_page(url):
         print(matiereparse)
         mercredi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 303px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 274px;']"
     jeudimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
     print("ça c'est jeudi")
     print(jeudimatieres)
@@ -73,7 +104,7 @@ def get_page(url):
         print(matiereparse)
         jeudi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 404px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 365px;']"
     vendredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
     print("ça c'est vendredi")
     print(vendredimatieres)
