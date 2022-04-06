@@ -1,0 +1,1 @@
+worker: python edt_discord.py
