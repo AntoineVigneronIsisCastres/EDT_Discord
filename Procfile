@@ -1,1 +1,1 @@
-worker: python edt_discord.py
+worker: python main.py
