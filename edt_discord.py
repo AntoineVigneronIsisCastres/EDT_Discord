@@ -5,59 +5,67 @@ from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
-def set_matiere_heure(driver, cssheure, matiereparse):
+def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
 
     # 8h15
-    matierehour = None
-    try:
-        hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 12px;']"+cssheure
-        matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
-        matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
-    except:
-        print("pas de cours à cette heure là")
-    if matierehour and matierehour == matiereparse:
-        matiereparse.append(BeautifulSoup('\n+8h15','html.parser'))
+    if "8h15" not in str(jourmatieres):
+        matierehour = None
+        try:
+            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 12px;']"+cssheure
+            matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+        except:
+            print("pas de cours à cette heure là")
+        if matierehour and matierehour == matiereparse:
+            matiereparse.append(BeautifulSoup('\n+8h15','html.parser'))
 
     # 9h15
-    matierehour = None
-    try:
-        hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 61px;']"+cssheure
-        matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
-        matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
-    except:
-        print("pas de cours à cette heure là")
-    if matierehour and matierehour == matiereparse:
-        matiereparse.append(BeautifulSoup('\n+9h15','html.parser'))
+    if "9h15" not in str(jourmatieres):
+        matierehour = None
+        try:
+            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 61px;']"+cssheure
+            matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+        except:
+            print("pas de cours à cette heure là")
+        if matierehour and matierehour == matiereparse:
+            matiereparse.append(BeautifulSoup('\n+9h15','html.parser'))
 
     # 10h30
-    try:
-        hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 122px;']"+cssheure
-        matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
-        matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
-    except:
-        print("pas de cours à cette heure là")
-    if matierehour and matierehour == matiereparse:
-        matiereparse.append(BeautifulSoup('\n+10h30','html.parser'))
+    if "10h30" not in str(jourmatieres):
+        matierehour = None
+        try:
+            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 122px;']"+cssheure
+            matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+        except:
+            print("pas de cours à cette heure là")
+        if matierehour and matierehour == matiereparse:
+            matiereparse.append(BeautifulSoup('\n+10h30','html.parser'))
 
     # 13h45
-    try:
-        hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 280px;']"+cssheure
-        matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
-        matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
-    except:
-        print("pas de cours à cette heure là")
-    if matierehour and matierehour == matiereparse:
-        matiereparse.append(BeautifulSoup('\n+13h45','html.parser'))
+    if "13h45" not in str(jourmatieres):
+        matierehour = None
+        try:
+            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 280px;']"+cssheure
+            matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+        except:
+            print("pas de cours à cette heure là")
+        if matierehour and matierehour == matiereparse:
+            matiereparse.append(BeautifulSoup('\n+13h45','html.parser'))
 
     # 16h00
-    try:
-        hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 390px;']"+cssheure
-        matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
-        matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
-    except:
-        print("pas de cours à cette heure là")
-    if matierehour and matierehour == matiereparse:
-        matiereparse.append(BeautifulSoup('\n+16h00','html.parser'))
+    if "16h00" not in str(jourmatieres):
+        matierehour = None
+        try:
+            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 390px;']"+cssheure
+            matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
+        except:
+            print("pas de cours à cette heure là")
+        if matierehour and matierehour == matiereparse:
+            matiereparse.append(BeautifulSoup('\n+16h00','html.parser'))
     
     return matiereparse
 
@@ -75,74 +83,59 @@ def get_page(url):
     time.sleep(3)
     data = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[4]").get_attribute('innerHTML')
     planning = BeautifulSoup(data, 'html.parser')
-    print(planning)
     test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
     dates = BeautifulSoup(test,'html.parser').findAll(class_="labelLegend")
     edt = {}
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
     lundimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
 
-    print("ça c'est lundi")
-    print(lundimatieres)
     cssheure = "[style*='top: 0px;']"
     lundi = []
     for matiere in lundimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
-        print(matiereparse)
-        set_matiere_heure(driver, cssheure, matiereparse)
+        set_matiere_heure(driver, cssheure, matiereparse, lundi)
         lundi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 91px;']"
     mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    print("ça c'est mardi")
-    print(mardimatieres)
     cssheure = "[style*='top: 91px;']"
     mardi = []
     for matiere in mardimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
-        set_matiere_heure(driver, cssheure, matiereparse)
+        set_matiere_heure(driver, cssheure, matiereparse, mardi)
         mardi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 182px;']"
     mercredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    print("ça c'est mercredi")
-    print(mercredimatieres)
     cssheure = "[style*='top: 182px;']"
     mercredi = []
     for matiere in mercredimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
-        set_matiere_heure(driver, cssheure, matiereparse)
+        set_matiere_heure(driver, cssheure, matiereparse, mercredi)
         mercredi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 274px;']"
     jeudimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    print("ça c'est jeudi")
-    print(jeudimatieres)
     cssheure = "[style*='top: 274px;']"
     jeudi = []
     for matiere in jeudimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
-        set_matiere_heure(driver, cssheure, matiereparse)
+        set_matiere_heure(driver, cssheure, matiereparse, jeudi)
         jeudi.append(matiereparse)
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 365px;']"
     vendredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    print("ça c'est vendredi")
-    print(vendredimatieres)
     cssheure = "[style*='top: 365px;']"
     vendredi = []
     for matiere in vendredimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
-        set_matiere_heure(driver, cssheure, matiereparse)
+        set_matiere_heure(driver, cssheure, matiereparse, vendredi)
         vendredi.append(matiereparse)
-
     semaine = [lundi,mardi,mercredi,jeudi,vendredi]
     i = 0
     for date in dates:
         if(i < 5):
-            print(date.text)
             edt[date.text] = semaine[i]
-            print(i)
             i += 1
 
     sendWebhook(edt)
@@ -159,9 +152,6 @@ def sendWebhook(embed_Cours):
 
     for date in embed_Cours:
         i = 0
-        print("ayooooooo")
-        print(embed_Cours)
-        print(date)
         coursjournee = ""
         title = ""
         for cours in embed_Cours[date]:
