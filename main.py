@@ -17,9 +17,12 @@ async def on_message(message):
 
     try:
         promo = message.content.split(' ')[1]
+        semainepro = message.content.split(' ')[2] == 'semainepro'
     except:
         promo = "fia4"
+        semainepro = False
+    
     if message.content.startswith("!edt"):
-        edt_discord.run(promo)
+        edt_discord.run(promo, semainepro)
 
 client.run(TOKEN)
