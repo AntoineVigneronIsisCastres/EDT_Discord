@@ -10,14 +10,18 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
     # 8h15
     if "8h15" not in str(jourmatieres):
         matierehour = None
+        heuredefin = ""
         try:
             hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 12px;']"+cssheure
             matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            divbrute = BeautifulSoup(matierehour.get_attribute('innerHTML'), 'html.parser')
+            if "width:98px" in str(divbrute):
+                heuredefin = " - 10h15"
             matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+8h15','html.parser'))
+            matiereparse.append(BeautifulSoup('\n+8h15'+heuredefin,'html.parser'))
 
     # 9h15
     if "9h15" not in str(jourmatieres):
@@ -34,26 +38,34 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
     # 10h30
     if "10h30" not in str(jourmatieres):
         matierehour = None
+        heuredefin = ""
         try:
             hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 122px;']"+cssheure
             matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            divbrute = BeautifulSoup(matierehour.get_attribute('innerHTML'), 'html.parser')
+            if "width:98px" in str(divbrute):
+                heuredefin = " - 12h30"
             matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+10h30','html.parser'))
+            matiereparse.append(BeautifulSoup('\n+10h30'+heuredefin,'html.parser'))
 
     # 13h45
     if "13h45" not in str(jourmatieres):
         matierehour = None
+        heuredefin = ""
         try:
             hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 280px;']"+cssheure
             matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            divbrute = BeautifulSoup(matierehour.get_attribute('innerHTML'), 'html.parser')
+            if "width:99px" in str(divbrute):
+                heuredefin = " - 15h45"
             matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+13h45','html.parser'))
+            matiereparse.append(BeautifulSoup('\n+13h45'+heuredefin,'html.parser'))
 
     # 16h00
     if "16h00" not in str(jourmatieres):
@@ -61,11 +73,14 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
         try:
             hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 390px;']"+cssheure
             matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
+            divbrute = BeautifulSoup(matierehour.get_attribute('innerHTML'), 'html.parser')
+            if "width:98px" in str(divbrute):
+                heuredefin = " - 18h00"
             matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+16h00','html.parser'))
+            matiereparse.append(BeautifulSoup('\n+16h00'+heuredefin,'html.parser'))
     
     return matiereparse
 
@@ -139,7 +154,6 @@ def get_page(url):
             i += 1
 
     sendWebhook(edt)
-    time.sleep(1000)
 
 def sendWebhook(embed_Cours):
 
