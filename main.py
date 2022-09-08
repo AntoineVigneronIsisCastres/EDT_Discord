@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import discord
 import os
+import edt_discord
 
 client = discord.Client()
 
@@ -14,6 +15,6 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content == "!edt":
-        __import__("edt_discord")
+        edt_discord.run()
 
 client.run(TOKEN)
