@@ -14,7 +14,12 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content == "!edt":
-        edt_discord.run()
+
+    try:
+        promo = message.content.split(' ')[1]
+    except:
+        promo = "fia4"
+    if message.content.startswith("!edt"):
+        edt_discord.run(promo)
 
 client.run(TOKEN)
