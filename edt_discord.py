@@ -1,8 +1,10 @@
+import os
 from selenium import webdriver
 from discord_webhook import DiscordWebhook, DiscordEmbed
 import time
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
+from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
 urlWebhook = "https://discord.com/api/webhooks/957043914735509624/HQyBkGpyTfBNYwNMSkKnfze5jlvaRzd2sznFD3szdJh4H1sP55AEWduvdjmqlczPmOmm"
@@ -12,7 +14,12 @@ def run(promo, semainepro):
     get_page(url, promo, semainepro)
 
 def get_page(url, promo, semainepro):
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    op = webdriver.ChromeOptions()
+    op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    op.add_argument("--headless")
+    op.add_argument("--no-sandbox")
+    op.add_argument("--disable-dev-sh-usage")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=op)
 
     driver.get(url)
     # sendWebhook()
