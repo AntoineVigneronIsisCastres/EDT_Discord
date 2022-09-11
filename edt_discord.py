@@ -33,6 +33,8 @@ def get_page(url, promo, semainepro):
     time.sleep(2)
     data = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[4]").get_attribute('innerHTML')
     planning = BeautifulSoup(data, 'html.parser')
+    wholepage = driver.find_element_by_xpath("/html/body")
+    print(wholepage)
     test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
     dates = BeautifulSoup(test,'html.parser').findAll(class_="labelLegend")
     edt = {}
