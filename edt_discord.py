@@ -46,7 +46,7 @@ def get_page(url, promo, semainepro):
         set_matiere_heure(driver, cssheure, matiereparse, lundi)
         lundi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 91px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;']"
     mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
     print(mardimatieres)
     cssheure = "[style*='top: 91px;']"
