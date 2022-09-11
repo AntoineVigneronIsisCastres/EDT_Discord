@@ -48,6 +48,7 @@ def get_page(url, promo, semainepro):
 
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 91px;']"
     mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+    print(mardimatieres)
     cssheure = "[style*='top: 91px;']"
     mardi = []
     for matiere in mardimatieres:
