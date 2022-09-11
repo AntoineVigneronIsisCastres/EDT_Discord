@@ -46,12 +46,12 @@ def get_page(url, promo, semainepro):
         set_matiere_heure(driver, cssheure, matiereparse, lundi)
         lundi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 79px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;']"
     mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
     cssheure = "[style*='top: 79px;']"
     mardi = []
     for matiere in mardimatieres:
-        matiereparse = BeautifulSoup(matiere.get_attribute('innerHTML'), 'html.parser')
+        matiereparse = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
         print(matiereparse)
         set_matiere_heure(driver, cssheure, matiereparse, mardi)
         mardi.append(matiereparse)
