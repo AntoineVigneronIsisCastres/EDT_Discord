@@ -121,7 +121,7 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
     if "9h15" not in str(jourmatieres):
         matierehour = None
         try:
-            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 61px;']"+cssheure
+            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 73px;']"+cssheure
             matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
             matierehour = BeautifulSoup(matierehour.get_attribute('innerText'), 'html.parser')
         except:
@@ -134,7 +134,7 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
         matierehour = None
         heuredefin = ""
         try:
-            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 122px;']"+cssheure
+            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 167px;']"+cssheure
             matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
             divbrute = BeautifulSoup(matierehour.get_attribute('innerHTML'), 'html.parser')
             if "width:59px" in str(divbrute):
@@ -150,7 +150,7 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
         matierehour = None
         heuredefin = ""
         try:
-            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 280px;']"+cssheure
+            hour_css_selector = "div[style*='cursor: auto; position: absolute; left: 233px;']"+cssheure
             matierehour = driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) if driver.find_element(by=By.CSS_SELECTOR, value=hour_css_selector) else None
             divbrute = BeautifulSoup(matierehour.get_attribute('innerHTML'), 'html.parser')
             if "width:60px" in str(divbrute):
