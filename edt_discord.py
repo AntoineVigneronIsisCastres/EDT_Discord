@@ -46,9 +46,9 @@ def get_page(url, promo, semainepro):
         set_matiere_heure(driver, cssheure, matiereparse, lundi)
         lundi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 91px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 79px;']"
     mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    cssheure = "[style*='top: 91px;']"
+    cssheure = "[style*='top: 79px;']"
     mardi = []
     for matiere in mardimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerHTML'), 'html.parser')
@@ -56,27 +56,27 @@ def get_page(url, promo, semainepro):
         set_matiere_heure(driver, cssheure, matiereparse, mardi)
         mardi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 182px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 158px;']"
     mercredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    cssheure = "[style*='top: 182px;']"
+    cssheure = "[style*='top: 158px;']"
     mercredi = []
     for matiere in mercredimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, mercredi)
         mercredi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 274px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 237px;']"
     jeudimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    cssheure = "[style*='top: 274px;']"
+    cssheure = "[style*='top: 237px;']"
     jeudi = []
     for matiere in jeudimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, jeudi)
         jeudi.append(matiereparse)
 
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 365px;']"
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 316px;']"
     vendredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    cssheure = "[style*='top: 365px;']"
+    cssheure = "[style*='top: 316px;']"
     vendredi = []
     for matiere in vendredimatieres:
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
