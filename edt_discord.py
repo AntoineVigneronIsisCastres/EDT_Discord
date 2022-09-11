@@ -51,6 +51,8 @@ def get_page(url, promo, semainepro):
     cssheure = "[style*='top: 79px;']"
     mardi = []
     for matiere in mardimatieres:
+        matiereparse2 = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
+        print(matiereparse2)
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         print(matiereparse)
         set_matiere_heure(driver, cssheure, matiereparse, mardi)
@@ -61,6 +63,8 @@ def get_page(url, promo, semainepro):
     cssheure = "[style*='top: 158px;']"
     mercredi = []
     for matiere in mercredimatieres:
+        matiereparse2 = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
+        print(matiereparse2)
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, mercredi)
         mercredi.append(matiereparse)
@@ -70,6 +74,8 @@ def get_page(url, promo, semainepro):
     cssheure = "[style*='top: 237px;']"
     jeudi = []
     for matiere in jeudimatieres:
+        matiereparse2 = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
+        print(matiereparse2)
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, jeudi)
         jeudi.append(matiereparse)
@@ -79,6 +85,8 @@ def get_page(url, promo, semainepro):
     cssheure = "[style*='top: 316px;']"
     vendredi = []
     for matiere in vendredimatieres:
+        matiereparse2 = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
+        print(matiereparse2)
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, vendredi)
         vendredi.append(matiereparse)
