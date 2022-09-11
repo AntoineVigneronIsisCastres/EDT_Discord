@@ -87,7 +87,7 @@ def get_page(url, promo, semainepro):
         if(i < 5):
             edt[date.text] = semaine[i]
             i += 1
-
+    print(edt)
     sendWebhook(edt)
 
 def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
