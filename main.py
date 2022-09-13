@@ -17,9 +17,12 @@ async def on_message(message):
 
     try:
         promo = message.content.split(' ')[1]
-        semainepro = message.content.split(' ')[2] == 'semainepro'
     except:
         promo = "fia4"
+        
+    try:
+        semainepro = message.content.split(' ')[2] == 'semainepro'
+    except:
         semainepro = False
     
     if message.content.startswith("!edt"):
