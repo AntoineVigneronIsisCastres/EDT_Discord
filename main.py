@@ -32,7 +32,10 @@ async def daily_edt():
                              avatar_url="https://media.discordapp.net/attachments/848264360119238706/849298764530974760/webhook_2_2.png")
         embed = DiscordEmbed(title='__***' + "EdT Scrapper" + '***__',
                         color=4894178)
-        embed.add_embed_field(name="", value="faites pas gaffe je fais un test journalier il est "+str(datetime.datetime.now()))
+        embed.add_embed_field(name="aeaeae", value="faites pas gaffe je fais un test journalier il est "+str(datetime.datetime.now()), inline=True)
+        embed.set_footer(text="ISIS Emploi du temps",
+                    icon_url="https://cdn.discordapp.com/attachments/931482193170157589/931486861459869756/ISIS-logo-verti-RVB.png")
+        embed.set_timestamp()
         webhook.add_embed(embed)
         webhook.execute()
         await asyncio.sleep(60)
