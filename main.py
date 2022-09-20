@@ -21,11 +21,14 @@ async def on_message(message):
         promo = "fia4"
         
     try:
-        semainepro = message.content.split(' ')[2] == 'semainepro'
+        if message.content.split(' ')[2] == 'semainepro':
+            semaine = message.content.split(' ')[2]
+        elif "/" in message.content.split(' ')[2]:
+            semaine = message.content.split(' ')[2]
     except:
-        semainepro = False
+        semaine = "False"
     
     if message.content.startswith("!edt"):
-        edt_discord.run(promo, semainepro)
+        edt_discord.run(promo, semaine)
 
 client.run(TOKEN)
