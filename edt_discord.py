@@ -23,14 +23,14 @@ def get_page(url, promo, semainepro):
 
     driver.get(url)
     # sendWebhook()
-    time.sleep(2)
+    time.sleep(1)
 
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input").send_keys(promo)
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button/img").click()
-    time.sleep(3)
-    if semainepro:
-        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[2]/div/div/div[1]/div/div/table[4]/tbody/tr[2]/td[2]/em/button").click()
     time.sleep(2)
+    if semainepro:
+        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[2]/div/div/div[1]/div/div/table[contains(@class,'x-btn-pressed')]/following-sibling::table").click()
+    time.sleep(1)
     data = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[4]").get_attribute('innerHTML')
     planning = BeautifulSoup(data, 'html.parser')
     test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
