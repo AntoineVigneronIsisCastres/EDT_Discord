@@ -28,6 +28,7 @@ def seconds_until(hours, minutes):
 async def daily_edt():
     while True:
         await asyncio.sleep(seconds_until(17,0))
+        print("OH LE WEBHOOK IL MARCHE PAS IL EST "+str(datetime.datetime.now()))
         webhook = DiscordWebhook(url=urlWebhook, username="ISIS",
                              avatar_url="https://media.discordapp.net/attachments/848264360119238706/849298764530974760/webhook_2_2.png")
         embed = DiscordEmbed(title='__***' + "EdT Scrapper" + '***__',
