@@ -9,7 +9,7 @@ from discord_webhook import DiscordWebhook, DiscordEmbed
 
 client = discord.Client(intents=discord.Intents.default())
 urlWebhook = "https://discord.com/api/webhooks/957043914735509624/HQyBkGpyTfBNYwNMSkKnfze5jlvaRzd2sznFD3szdJh4H1sP55AEWduvdjmqlczPmOmm"
-
+jours = ["lundi", "mardi", "mercredi", "jeudi", "vendredi"]
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
