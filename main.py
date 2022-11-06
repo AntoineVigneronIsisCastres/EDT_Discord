@@ -27,7 +27,7 @@ def seconds_until(hours, minutes):
 @tasks.loop(hours=24)
 async def daily_edt():
     while True:
-        await asyncio.sleep(seconds_until(21,42))
+        await asyncio.sleep(seconds_until(21,45))
         edt_discord.edt_daily()
         print("OH LE WEBHOOK IL MARCHE PAS IL EST "+str(datetime.datetime.now()))
         webhook = DiscordWebhook(url=urlWebhook, username="ISIS",
