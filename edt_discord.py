@@ -47,8 +47,11 @@ def get_page(url, promo, semaine, driver):
         driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[2]/div/div/div[1]/div/div/table[contains(@class,'x-btn-pressed')]/following-sibling::table").click()
     elif "/" in semaine:
         jour = semaine.split('/')[0]
+        print(jour)
         moisnum = semaine.split('/')[1]
+        print(moisnum)
         datesemaine = f'{mois[moisnum]} {jour}'
+        print(datesemaine)
         driver.find_element_by_xpath("//button[text()[contains(.,'"+datesemaine+"')]]").click()
     time.sleep(2)
     data = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[4]").get_attribute('innerHTML')
