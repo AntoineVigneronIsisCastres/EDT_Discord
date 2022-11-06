@@ -56,6 +56,18 @@ async def on_message(message):
     except:
         promo = "fia4"
         
+    semaine = "False"
+    jour = "False"
+    try:
+        if message.content.split(' ')[2] == 'semainepro':
+            semaine = message.content.split(' ')[2]
+        elif "/" in message.content.split(' ')[2]:
+            semaine = message.content.split(' ')[2]
+        elif message.content.split(' ')[2] in jours:
+            jour = message.content.split(' ')[2]
+    except:
+        semaine = "False"
+    print(message.content)
     try:
         if message.content.split(' ')[2] == 'semainepro':
             semaine = message.content.split(' ')[2]
@@ -63,10 +75,11 @@ async def on_message(message):
             semaine = message.content.split(' ')[2]
     except:
         semaine = "False"
-
-    
     if message.content.startswith("!edt"):
-        edt_discord.run(promo, semaine)
+        if semaine != "False":
+            edt_discord.run_semaine(promo, semaine)
+        elif jour != "False":
+            edt_discord.run_jour(promo, jour)
 
 
 client.run(TOKEN)

@@ -25,14 +25,47 @@ mois = {
     "12": "décembre"
 }
 
-def run(promo, semaine):
-    op = webdriver.ChromeOptions()
-    op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    op.add_argument("--headless")
-    op.add_argument("--no-sandbox")
-    op.add_argument("--disable-dev-sh-usage")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=op)
+def run_semaine(promo, semaine):
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     get_page(url, promo, semaine, driver)
+
+def run_jour(promo, jour):
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    get_page_jour(url, promo, jour, driver)
+
+def get_page_jour(url, promo, jour, driver):
+
+    driver.get(url)
+    time.sleep(2)
+
+    driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input").send_keys(promo)
+    driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button/img").click()
+    time.sleep(2)
+    if jour == "lundi":
+        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[1]/tbody/tr[2]/td[2]/em/button").click()
+    elif jour == "mardi":
+        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[2]/tbody/tr[2]/td[2]/em/button").click()
+    elif jour == "mercredi":
+        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[3]/tbody/tr[2]/td[2]/em/button").click()
+    elif jour == "jeudi":
+        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[4]/tbody/tr[2]/td[2]/em/button").click()
+    elif jour == "vendredi":
+        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[5]/tbody/tr[2]/td[2]/em/button").click()
+    time.sleep(2)
+    edt = {}
+    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
+    jourmatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+    test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
+    date = BeautifulSoup(test,'html.parser').find(class_="labelLegend")
+    cssheure = "[style*='top: 0px;']"
+    jour = []
+    for matiere in jourmatieres:
+        matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+        set_matiere_heure(driver, cssheure, matiereparse, jour)
+        jour.append(matiereparse)
+    edt[date.text] = jour
+    sendWebhook(jour)
+
 
 def get_page(url, promo, semaine, driver):
 
@@ -47,11 +80,8 @@ def get_page(url, promo, semaine, driver):
         driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[2]/div/div/div[1]/div/div/table[contains(@class,'x-btn-pressed')]/following-sibling::table").click()
     elif "/" in semaine:
         jour = semaine.split('/')[0]
-        print(jour)
         moisnum = semaine.split('/')[1]
-        print(moisnum)
         datesemaine = f'{mois[moisnum]} {jour}'
-        print(datesemaine)
         driver.find_element_by_xpath("//button[text()[contains(.,'"+datesemaine+"')]]").click()
     time.sleep(2)
     data = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[4]").get_attribute('innerHTML')
