@@ -267,7 +267,7 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+8h15'+heuredefin,'html.parser'))
+            matiereparse.append(BeautifulSoup('\n-8h15'+heuredefin,'html.parser'))
 
     # 9h15
     if "9h15" not in str(jourmatieres):
@@ -279,7 +279,7 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+9h15','html.parser'))
+            matiereparse.append(BeautifulSoup('\n-9h15','html.parser'))
 
     # 10h30
     if "10h30" not in str(jourmatieres):
@@ -295,7 +295,7 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+10h30'+heuredefin,'html.parser'))
+            matiereparse.append(BeautifulSoup('\n-10h30'+heuredefin,'html.parser'))
 
     # 13h45
     if "13h45" not in str(jourmatieres):
@@ -311,7 +311,7 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+13h45'+heuredefin,'html.parser'))
+            matiereparse.append(BeautifulSoup('\n-13h45'+heuredefin,'html.parser'))
 
     # 16h00
     if "16h00" not in str(jourmatieres):
@@ -327,7 +327,7 @@ def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):
         except:
             print("pas de cours à cette heure là")
         if matierehour and matierehour == matiereparse:
-            matiereparse.append(BeautifulSoup('\n+16h00'+heuredefin,'html.parser'))
+            matiereparse.append(BeautifulSoup('\n-16h00'+heuredefin,'html.parser'))
     
     return matiereparse
 
@@ -353,7 +353,7 @@ def sendWebhook(embed_Cours):
             coursjournee = str(cours)
             i += 1
             embed.add_embed_field(name=title,
-                                  value="```diff\n" + coursjournee + "``` ",
+                                  value="```diff\n+" + coursjournee + "``` ",
                                   inline=True)
 
     embed.set_footer(text="ISIS Emploi du temps",
