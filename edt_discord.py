@@ -52,6 +52,7 @@ def get_page_jour(url, promo, jour, driver):
     if jour == "lundi":
         css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
         lundimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        time.sleep(2)
         cssheure = "[style*='top: 0px;']"
         jour = []
         for matiere in lundimatieres:
@@ -62,6 +63,7 @@ def get_page_jour(url, promo, jour, driver):
     elif jour == "mardi":
         css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 79px;']"
         mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        time.sleep(2)
         cssheure = "[style*='top: 79px;']"
         jour = []
         for matiere in mardimatieres:
@@ -72,6 +74,7 @@ def get_page_jour(url, promo, jour, driver):
     elif jour == "mercredi":
         css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 158px;']"
         mercredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        time.sleep(2)
         cssheure = "[style*='top: 158px;']"
         jour = []
         for matiere in mercredimatieres:
@@ -82,6 +85,7 @@ def get_page_jour(url, promo, jour, driver):
     elif jour == "jeudi":
         css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 237px;']"
         jeudimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        time.sleep(2)
         cssheure = "[style*='top: 237px;']"
         jour = []
         for matiere in jeudimatieres:
@@ -92,6 +96,7 @@ def get_page_jour(url, promo, jour, driver):
     elif jour == "vendredi":
         css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 316px;']"
         vendredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        time.sleep(2)
         cssheure = "[style*='top: 316px;']"
         jour = []
         for matiere in vendredimatieres:
