@@ -1,3 +1,4 @@
+import datetime
 import os
 from selenium import webdriver
 from discord_webhook import DiscordWebhook, DiscordEmbed
@@ -36,42 +37,73 @@ def run_jour(promo, jour):
 def get_page_jour(url, promo, jour, driver):
 
     driver.get(url)
-    time.sleep(2)
+    time.sleep(3)
 
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input").send_keys(promo)
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button/img").click()
-    time.sleep(2)
+    time.sleep(3)
+    test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
+    dates = BeautifulSoup(test,'html.parser').findAll(class_="labelLegend")
     if jour == "lundi":
-        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[1]/tbody/tr[2]/td[2]/em/button").click()
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
+        lundimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 0px;']"
+        jour = []
+        for matiere in lundimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[0].text
     elif jour == "mardi":
-        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[2]/tbody/tr[2]/td[2]/em/button").click()
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 79px;']"
+        mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 79px;']"
+        jour = []
+        for matiere in mardimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[1].text
     elif jour == "mercredi":
-        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[3]/tbody/tr[2]/td[2]/em/button").click()
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 158px;']"
+        mercredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 158px;']"
+        jour = []
+        for matiere in mercredimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[2].text   
     elif jour == "jeudi":
-        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[4]/tbody/tr[2]/td[2]/em/button").click()
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 237px;']"
+        jeudimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 237px;']"
+        jour = []
+        for matiere in jeudimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[3].text
     elif jour == "vendredi":
-        driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[1]/div/div/table[5]/tbody/tr[2]/td[2]/em/button").click()
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 316px;']"
+        vendredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 316px;']"
+        jour = []
+        for matiere in vendredimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[4].text    
     time.sleep(2)
     edt = {}
-    css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
-    jourmatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-    test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
-    date = BeautifulSoup(test,'html.parser').find(class_="labelLegend")
-    cssheure = "[style*='top: 0px;']"
-    jour = []
-    for matiere in jourmatieres:
-        matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
-        set_matiere_heure(driver, cssheure, matiereparse, jour)
-        jour.append(matiereparse)
-    edt[date.text] = jour
+    edt[date] = jour
     sendWebhook(jour)
 
 
 def get_page(url, promo, semaine, driver):
 
     driver.get(url)
-    # sendWebhook()
-    time.sleep(2)
+    time.sleep(3)
 
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input").send_keys(promo)
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button/img").click()
@@ -84,8 +116,6 @@ def get_page(url, promo, semaine, driver):
         datesemaine = f'{mois[moisnum]} {jour}'
         driver.find_element_by_xpath("//button[text()[contains(.,'"+datesemaine+"')]]").click()
     time.sleep(2)
-    data = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[4]").get_attribute('innerHTML')
-    planning = BeautifulSoup(data, 'html.parser')
     test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
     dates = BeautifulSoup(test,'html.parser').findAll(class_="labelLegend")
     edt = {}
@@ -104,7 +134,6 @@ def get_page(url, promo, semaine, driver):
     cssheure = "[style*='top: 79px;']"
     mardi = []
     for matiere in mardimatieres:
-        matiereparse2 = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, mardi)
         mardi.append(matiereparse)
@@ -114,8 +143,6 @@ def get_page(url, promo, semaine, driver):
     cssheure = "[style*='top: 158px;']"
     mercredi = []
     for matiere in mercredimatieres:
-        matiereparse2 = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
-        print(matiereparse2)
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, mercredi)
         mercredi.append(matiereparse)
@@ -125,7 +152,6 @@ def get_page(url, promo, semaine, driver):
     cssheure = "[style*='top: 237px;']"
     jeudi = []
     for matiere in jeudimatieres:
-        matiereparse2 = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, jeudi)
         jeudi.append(matiereparse)
@@ -135,7 +161,6 @@ def get_page(url, promo, semaine, driver):
     cssheure = "[style*='top: 316px;']"
     vendredi = []
     for matiere in vendredimatieres:
-        matiereparse2 = BeautifulSoup(matiere.get_attribute('outerHTML'), 'html.parser')
         matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
         set_matiere_heure(driver, cssheure, matiereparse, vendredi)
         vendredi.append(matiereparse)
@@ -145,7 +170,69 @@ def get_page(url, promo, semaine, driver):
         if(i < 5):
             edt[date.text] = semaine[i]
             i += 1
-    print(edt)
+    sendWebhook(edt)
+
+
+def edt_daily(driver, promo):
+
+    driver.get(url)
+    time.sleep(3)
+    driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input").send_keys(promo)
+    driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button/img").click()
+    time.sleep(5)
+    today = datetime.datetime.today().weekday()
+    test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
+    dates = BeautifulSoup(test,'html.parser').findAll(class_="labelLegend")
+    jour = []
+    date = None
+    if today == 0:
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
+        lundimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 0px;']"
+        for matiere in lundimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[0].text
+    elif today == 1:
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 79px;']"
+        mardimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 79px;']"
+        for matiere in mardimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[1].text
+    elif today == 2:
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 158px;']"
+        mercredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 158px;']"
+        for matiere in mercredimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[2].text
+    elif today == 3:
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 237px;']"
+        jeudimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 237px;']"
+        for matiere in jeudimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[3].text
+    elif today == 4:
+        css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 316px;']"
+        vendredimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
+        cssheure = "[style*='top: 316px;']"
+        for matiere in vendredimatieres:
+            matiereparse = BeautifulSoup(matiere.get_attribute('innerText'), 'html.parser')
+            set_matiere_heure(driver, cssheure, matiereparse, jour)
+            jour.append(matiereparse)
+        date = dates[4].text
+    time.sleep(3)
+    edt = {}
+    edt[date] = jour
     sendWebhook(edt)
 
 def set_matiere_heure(driver, cssheure, matiereparse, jourmatieres):

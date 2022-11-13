@@ -28,25 +28,13 @@ def seconds_until(hours, minutes):
 async def daily_edt():
     while True:
         await asyncio.sleep(seconds_until(23,00))
-        #edt_discord.edt_daily()
-        print("OH LE WEBHOOK IL MARCHE PAS IL EST "+str(datetime.datetime.now()))
-        webhook = DiscordWebhook(url=urlWebhook, username="ISIS",
-                             avatar_url="https://media.discordapp.net/attachments/848264360119238706/849298764530974760/webhook_2_2.png")
-        embed = DiscordEmbed(title='__***' + "EdT Scrapper" + '***__',
-                        color=4894178)
-        embed.add_embed_field(name="aeaeae", value="faites pas gaffe je fais un test journalier il est "+str(datetime.datetime.now()), inline=True)
-        embed.set_footer(text="ISIS Emploi du temps",
-                    icon_url="https://cdn.discordapp.com/attachments/931482193170157589/931486861459869756/ISIS-logo-verti-RVB.png")
-        embed.set_timestamp()
-        webhook.add_embed(embed)
-        webhook.execute()
+        edt_discord.edt_daily()
         await asyncio.sleep(60)
 
 
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
-    print(datetime.datetime.now())
     daily_edt.start()
 
 
@@ -67,14 +55,6 @@ async def on_message(message):
             semaine = message.content.split(' ')[2]
         elif message.content.split(' ')[2] in jours:
             jour = message.content.split(' ')[2]
-    except:
-        semaine = "False"
-    print(message.content)
-    try:
-        if message.content.split(' ')[2] == 'semainepro':
-            semaine = message.content.split(' ')[2]
-        elif "/" in message.content.split(' ')[2]:
-            semaine = message.content.split(' ')[2]
     except:
         semaine = "False"
     if message.content.startswith("!edt"):
