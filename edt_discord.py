@@ -34,6 +34,10 @@ def run_jour(promo, jour):
     driver = webdriver.Chrome(ChromeDriverManager().install())
     get_page_jour(url, promo, jour, driver)
 
+def run_daily():
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    edt_daily(driver, "fia4")
+
 def get_page_jour(url, promo, jour, driver):
 
     driver.get(url)
