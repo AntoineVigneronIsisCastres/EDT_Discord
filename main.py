@@ -40,10 +40,13 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
+    print("aaaaaaaaaa")
+    print(message.content)
     try:
         promo = message.content.split(' ')[1]
     except:
         promo = "fia4"
+    print("bbbbbbbbbbbbbbbb")
         
     semaine = "False"
     jour = "False"
@@ -56,6 +59,7 @@ async def on_message(message):
             jour = message.content.split(' ')[2]
     except:
         semaine = "False"
+    print("ccccccccccccccccc")
     if message.content.startswith("!edt"):
         if semaine != "False":
             edt_discord.run_semaine(promo, semaine)
