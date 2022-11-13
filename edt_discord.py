@@ -120,9 +120,11 @@ def get_page(url, promo, semaine, driver):
     print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
     time.sleep(3)
     if semaine == "semainepro":
+        time.sleep(1)
         driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[2]/div/div/div[1]/div/div/table[contains(@class,'x-btn-pressed')]/following-sibling::table").click()
         print(semaine)
     elif "/" in semaine:
+        time.sleep(1)
         jour = semaine.split('/')[0]
         moisnum = semaine.split('/')[1]
         datesemaine = f'{mois[moisnum]} {jour}'
