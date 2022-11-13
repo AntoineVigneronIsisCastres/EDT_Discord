@@ -61,7 +61,9 @@ async def on_message(message):
         semaine = "False"
     print("ccccccccccccccccc")
     if message.content.startswith("!edt"):
+        print("ddddddddddddddddddd")
         if semaine != "False":
+            print("eeeeeeeeeeeeeeeeeeeeeeeee")
             edt_discord.run_semaine(promo, semaine)
         elif jour != "False":
             edt_discord.run_jour(promo, jour)

@@ -27,6 +27,7 @@ mois = {
 }
 
 def run_semaine(promo, semaine):
+    print("ffffffffffffffffffffffffff")
     driver = webdriver.Chrome(ChromeDriverManager().install())
     get_page(url, promo, semaine, driver)
 
@@ -108,9 +109,10 @@ def get_page(url, promo, semaine, driver):
 
     driver.get(url)
     time.sleep(3)
-
+    print("ggggggggggggggggggggggggggggggg")
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input").send_keys(promo)
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button/img").click()
+    print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
     time.sleep(3)
     if semaine == "semainepro":
         driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[2]/div/div/div[1]/div/div/table[contains(@class,'x-btn-pressed')]/following-sibling::table").click()
@@ -119,13 +121,14 @@ def get_page(url, promo, semaine, driver):
         moisnum = semaine.split('/')[1]
         datesemaine = f'{mois[moisnum]} {jour}'
         driver.find_element_by_xpath("//button[text()[contains(.,'"+datesemaine+"')]]").click()
+    print("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
     time.sleep(2)
     test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
     dates = BeautifulSoup(test,'html.parser').findAll(class_="labelLegend")
     edt = {}
     css_selector = "div[style*='cursor: auto; position: absolute;'][style*='top: 0px;']"
     lundimatieres = driver.find_elements(by=By.CSS_SELECTOR, value=css_selector)
-
+    print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
     cssheure = "[style*='top: 0px;']"
     lundi = []
     for matiere in lundimatieres:
@@ -174,6 +177,7 @@ def get_page(url, promo, semaine, driver):
         if(i < 5):
             edt[date.text] = semaine[i]
             i += 1
+    print("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
     sendWebhook(edt)
 
 
