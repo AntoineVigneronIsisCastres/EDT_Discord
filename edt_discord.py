@@ -119,6 +119,7 @@ def get_page(url, promo, semaine, driver):
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button/img").click()
     print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
     time.sleep(3)
+    print(semaine)
     if semaine == "semainepro":
         driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[2]/div/div/div[2]/div/div/div[1]/div/div/table[contains(@class,'x-btn-pressed')]/following-sibling::table").click()
     elif "/" in semaine:
