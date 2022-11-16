@@ -46,7 +46,7 @@ def get_page_jour(url, promo, jour, driver):
 
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/input").send_keys(promo)
     driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/table/tbody/tr[2]/td[2]/em/button/img").click()
-    time.sleep(3)
+    time.sleep(4)
     test = driver.find_element_by_xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div/div[2]").get_attribute('innerHTML')
     dates = BeautifulSoup(test,'html.parser').findAll(class_="labelLegend")
     if jour == "lundi":
