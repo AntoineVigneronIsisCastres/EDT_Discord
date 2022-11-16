@@ -107,7 +107,7 @@ def get_page_jour(url, promo, jour, driver):
     time.sleep(3)
     edt = {}
     edt[date] = jour
-    sendWebhook(jour)
+    sendWebhook(edt)
 
 
 def get_page(url, promo, semaine, driver):
