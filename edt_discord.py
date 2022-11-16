@@ -104,7 +104,7 @@ def get_page_jour(url, promo, jour, driver):
             set_matiere_heure(driver, cssheure, matiereparse, jour)
             jour.append(matiereparse)
         date = dates[4].text    
-    time.sleep(2)
+    time.sleep(3)
     edt = {}
     edt[date] = jour
     sendWebhook(jour)
