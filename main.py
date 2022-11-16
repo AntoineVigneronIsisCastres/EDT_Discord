@@ -27,7 +27,7 @@ def seconds_until(hours, minutes):
 @tasks.loop(hours=24)
 async def daily_edt():
     while True:
-        await asyncio.sleep(seconds_until(6,0))
+        await asyncio.sleep(seconds_until(7,40))
         edt_discord.run_daily()
         await asyncio.sleep(60)
 
@@ -35,6 +35,7 @@ async def daily_edt():
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+    daily_edt.start()
 
 
 @client.event
