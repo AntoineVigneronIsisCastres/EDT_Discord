@@ -27,7 +27,7 @@ def seconds_until(hours, minutes):
 @tasks.loop(hours=24)
 async def daily_edt():
     while True:
-        await asyncio.sleep(seconds_until(7,40))
+        await asyncio.sleep(seconds_until(5,30))
         edt_discord.run_daily()
         await asyncio.sleep(60)
 
